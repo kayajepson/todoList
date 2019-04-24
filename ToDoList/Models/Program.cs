@@ -21,16 +21,26 @@ namespace ToDoList.Models
           string userInput = Console.ReadLine();
           Item newItem = new Item(userInput);
           string printOutDescription = newItem.GetDescription();
+          Console.WriteLine("'" + printOutDescription + "'" + " has been added to your todo list");
           List<string> todoList = new List<string>();
           todoList.Add(printOutDescription);
         }
         else if (view)
         {
-          foreach (Item task in Item.GetAll())
-          Console.WriteLine(task.GetDescription());
+          if (Item.GetAll().Count == 0)
+          {
+            Console.WriteLine("You have no items in your todo list.");
+          }
+          else
+          {
+            Console.WriteLine("Your todo list:");
+            foreach (Item task in Item.GetAll())
+            Console.WriteLine(task.GetDescription());
+          }
         }
         else if (quit)
         {
+          Console.WriteLine("Goodbye!");
           x = 1;
           break;
         }
